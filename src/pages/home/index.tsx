@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { api } from "../../services/api";
 import { CartContext } from "../../context/cartContext";
+import toast from "react-hot-toast";
 
 export interface ProductProps {
   id: number;
@@ -12,13 +13,14 @@ export interface ProductProps {
 }
 
 export function Home() {
-
-  
   const [products, setProducts] = useState<ProductProps[]>([]);
-  const {addItemCart} = useContext(CartContext);
+  const { addItemCart } = useContext(CartContext);
 
-  function handleAddCartItem(product: ProductProps){
-    addItemCart(product)
+  function handleAddCartItem(product: ProductProps) {
+    addItemCart(product);
+    toast.success("Produto adicionado no carrinho.", {
+      style: { borderRadius: 10, backgroundColor: "#121212", color: "#fff" },
+    });
   }
   useEffect(() => {
     async function getProducts() {
@@ -46,8 +48,16 @@ export function Home() {
 
                 <p className="font-medium mt-1 mb-2">{item.title}</p>
                 <div className="flex gap-3 items-center">
-                  <strong className="text-zinc-700/90">{item.price.toLocaleString("pt-BR", {style:"currency",currency: "brl"})}</strong>
-                  <button onClick={() => handleAddCartItem(item) } className="bg-zinc-900 p-1 rounded">
+                  <strong className="text-zinc-700/90">
+                    {item.price.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "brl",
+                    })}
+                  </strong>
+                  <button
+                    onClick={() => handleAddCartItem(item)}
+                    className="bg-zinc-900 p-1 rounded"
+                  >
                     <BsCartPlus size={20} color="#FFF" />{" "}
                   </button>
                 </div>
