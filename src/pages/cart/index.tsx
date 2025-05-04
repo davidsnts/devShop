@@ -3,7 +3,7 @@ import { CartContext } from "../../context/cartContext";
 import { Link } from "react-router-dom";
 
 export function Cart() {
-  const { cart } = useContext(CartContext);
+  const { cart, removeItemCart, addItemCart, total } = useContext(CartContext);
   return (
     <div className="w-full max-w-7xl mx-auto">
       <h1 className="font-medium text-2xl text-center my-4">Meu Carrinho</h1>
@@ -32,11 +32,17 @@ export function Cart() {
             })}{" "}
           </strong>
           <div className="flex items-center justify-center gap-3">
-            <button className="bg-slate-600 px-2 rounded text-white font-medium justify-center ">
+            <button
+              onClick={() => removeItemCart(item)}
+              className="bg-slate-600 px-2 rounded text-white font-medium justify-center "
+            >
               -
             </button>
             {item.amount}
-            <button className="bg-slate-600 px-2 rounded text-white font-medium justify-center ">
+            <button
+              onClick={() => addItemCart(item)}
+              className="bg-slate-600 px-2 rounded text-white font-medium justify-center "
+            >
               +
             </button>
           </div>
@@ -50,7 +56,7 @@ export function Cart() {
         </section>
       ))}
 
-      {cart.length !== 0 && <p className="font-bold mt-4">Total: R$1.000,0</p>}
+      {cart.length !== 0 && <p className="font-bold mt-4">Total: {total}</p>}
     </div>
   );
 }
