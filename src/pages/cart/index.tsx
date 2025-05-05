@@ -34,14 +34,14 @@ export function Cart() {
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={() => removeItemCart(item)}
-              className="bg-slate-600 px-2 rounded text-white font-medium justify-center "
+              className="bg-slate-600 px-2 rounded text-white font-medium justify-center cursor-pointer"
             >
               -
             </button>
             {item.amount}
             <button
               onClick={() => addItemCart(item)}
-              className="bg-slate-600 px-2 rounded text-white font-medium justify-center "
+              className="bg-slate-600 px-2 rounded text-white font-medium justify-center cursor-pointer"
             >
               +
             </button>
